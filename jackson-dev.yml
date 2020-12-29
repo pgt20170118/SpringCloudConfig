@@ -1,0 +1,5 @@
+  
+spring:
+  jackson: #p配置时区
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
