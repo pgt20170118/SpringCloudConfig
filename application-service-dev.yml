@@ -21,3 +21,13 @@ mybatis-plus:
   mapper-locations: classpath*:/mapper/**.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# springboot中暴露健康检查等断点接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  # 暴露健康接口的细节
+  endpoint:
+    health:
+      show-details: always
