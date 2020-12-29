@@ -12,13 +12,6 @@ spring:
   jackson: #p配置时区
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
-eureka:
-  client:
-    serviceUrl: # eureka server的路径
-      defaultZone: http://pgt123:pgt123@LagouCloudEurekaServerA:9300/eureka,http://pgt123:pgt123@LagouCloudEurekaServerB:9301/eureka
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**.xml
   configuration:
