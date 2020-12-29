@@ -12,6 +12,11 @@ spring:
   jackson: #p配置时区
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
+  rabbitmq:
+    host: 192.168.217.130
+    port: 5672
+    username: pgtmq
+    password: 123456
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**.xml
   configuration:
