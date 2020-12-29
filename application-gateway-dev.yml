@@ -1,1 +1,43 @@
-
+spring:
+  #网关的配置
+  cloud:
+    gateway:
+      routes: #配置路由
+        - id: service-user-router
+          uri: lb://service-user
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/fallback
+        - id: service-order-router
+          #动态路由：从注册中心获取对应服务的实例
+          uri: lb://service-order
+          predicates: #当断言成功后，交给某一个微服务处理时使用的是转发
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+            - name: Hystrix
+              args:
+                name: fallbackcmdz
+                fallbackUri: forward:/fallback
+        - id: service-goods-router
+          uri: lb://service-goods
+          predicates:
+            - Path=/goods/**
+          filters:
+            - StripPrefix=1 #去掉uri中的第一部分，所以就要求我们通过网关访问的时候，把uri 的第一部分设置为product，从uri的第二部分开始才是真正的uri
+            - name: Hystrix
+              args:
+                name: fallbackcmds
+                fallbackUri: forward:/fallback
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000 #
